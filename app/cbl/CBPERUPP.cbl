@@ -22,9 +22,9 @@
        01  EOF                   PIC X VALUE 'N'.
        01  SQLCODE               PIC S9(4) COMP.
 
-           EXEC SQL
-               INCLUDE SQLCA
-           END-EXEC.
+       EXEC SQL
+           INCLUDE SQLCA
+       END-EXEC.
 
        PROCEDURE DIVISION.
        BEGIN.
@@ -57,3 +57,4 @@
            INSPECT WS-LAST-NAME CONVERTING
                'abcdefghijklmnopqrstuvwxyz'
                TO 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.
+           EXIT.

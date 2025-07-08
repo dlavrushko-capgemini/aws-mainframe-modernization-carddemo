@@ -43,13 +43,9 @@
        01  EOF                   PIC X VALUE 'N'.
        01  SQLCODE               PIC S9(4) COMP.
 
-           EXEC SQL
-               INCLUDE SQLCA
-           END-EXEC.
-
        PROCEDURE DIVISION.
        BEGIN.
-           OPEN INPUT PERSON-FILE
+           OPEN INPUT PERSON-FILE.
            PERFORM UNTIL EOF = 'Y'
                READ PERSON-FILE
                    AT END
@@ -59,16 +55,10 @@
                        MOVE LAST-NAME TO WS-LAST-NAME
                        MOVE BIRTH-DATE TO WS-BIRTH-DATE
                        PERFORM CONVERT-UPPERCASE
-                       EXEC SQL
-                           INSERT INTO PERSON_TABLE
-                               (FIRST_NAME, LAST_NAME, BIRTH_DATE)
-                           VALUES
-                               (:WS-FIRST-NAME, :WS-LAST-NAME,
-                                :WS-BIRTH-DATE)
-                       END-EXEC
+                       DISPLAY 'WRITE RECORD TO DATABASE'
                END-READ
-           END-PERFORM
-           CLOSE PERSON-FILE
+           END-PERFORM.
+           CLOSE PERSON-FILE.
            STOP RUN.
 
        CONVERT-UPPERCASE.
